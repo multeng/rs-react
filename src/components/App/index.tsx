@@ -1,7 +1,9 @@
 import React from 'react';
 import { AppState } from '../../types';
 import { getPokemonsByName } from '../../api';
-import CardList from '../CadtList/CardtList';
+import CardList from '../CardList';
+import styles from './app.module.css';
+import './global.css';
 
 class App extends React.PureComponent<object, AppState> {
   constructor(props: object) {
@@ -21,7 +23,11 @@ class App extends React.PureComponent<object, AppState> {
   render() {
     const { pokemons, isLoaded } = this.state;
 
-    return <div>{isLoaded ? <CardList cards={pokemons} /> : 'loading...'}</div>;
+    return (
+      <div className={styles.container}>
+        {isLoaded ? <CardList cards={pokemons} /> : 'loading...'}
+      </div>
+    );
   }
 }
 
