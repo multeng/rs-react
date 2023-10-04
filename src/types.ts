@@ -92,3 +92,16 @@ export interface Type {
   slot: number;
   type: RawData;
 }
+
+export interface AppState {
+  pokemons: Pokemon[];
+  isLoaded: boolean;
+}
+
+export interface CardListProps {
+  cards: Pokemon[];
+}
+
+export interface CardProps {
+  data: Pokemon;
+}

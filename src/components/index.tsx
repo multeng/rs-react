@@ -1,4 +1,5 @@
 import App from './App/App';
+import CardList from './CadtList/CardtList';
+import Card from './Card/Card';
 
-// eslint-disable-next-line import/prefer-default-export
-export { App };
+export { App, CardList, Card };
