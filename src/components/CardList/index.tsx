@@ -8,7 +8,9 @@ class CardList extends React.PureComponent<CardListProps, object> {
     const { cards } = this.props;
     return (
       <div className={styles.cardList}>
-        {cards.length && cards.map((pokemon) => <Card key={pokemon.id} data={pokemon} />)}
+        {cards.length
+          ? cards.map((pokemon) => <Card key={pokemon.id} data={pokemon} />)
+          : 'pokemons not found'}
       </div>
     );
   }

@@ -96,6 +96,7 @@ export interface Type {
 export interface AppState {
   pokemons: Pokemon[];
   isLoaded: boolean;
+  searchWord: string;
 }
 
 export interface CardListProps {
@@ -104,4 +105,9 @@ export interface CardListProps {
 
 export interface CardProps {
   data: Pokemon;
+}
+
+export interface SearchProps {
+  search: () => void;
+  handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
