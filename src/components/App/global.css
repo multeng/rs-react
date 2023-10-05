@@ -455,4 +455,6 @@ textarea {
   --secondary-text: #1b1f3b;
   --button-primary: #526ed3;
   --button-primary-hover: #6c86e2;
+  --button-disabled: #808080;
+  --card-hover-bg: #4ac99b;
 }

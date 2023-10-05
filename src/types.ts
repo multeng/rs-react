@@ -96,6 +96,9 @@ export interface Type {
 export interface AppState {
   pokemons: Pokemon[];
   isLoaded: boolean;
+}
+
+export interface SearchState {
   searchWord: string;
 }
 
@@ -108,6 +111,5 @@ export interface CardProps {
 }
 
 export interface SearchProps {
-  search: () => void;
-  handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  setPokemons: (pokeName?: string) => Promise<void>;
 }

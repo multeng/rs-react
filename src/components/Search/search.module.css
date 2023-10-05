@@ -25,3 +25,7 @@
 .searchButton:hover {
   background-color: var(--button-primary-hover);
 }
+
+.searchButton:disabled {
+  background-color: var(--button-disabled);
+}
