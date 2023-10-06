@@ -22,7 +22,8 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
     this.setState({ searchWord: event.target.value });
   }
 
-  search() {
+  search(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     const { setPokemons } = this.props;
     const { searchWord } = this.state;
     localStorage.setItem('searchWord', searchWord);
@@ -33,22 +34,22 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
     const { searchWord } = this.state;
 
     return (
-      <div className={styles.container}>
+      <form className={styles.container} onSubmit={this.search}>
         <input
           className={styles.search}
           onChange={this.handleInput}
           type="search"
           placeholder="search..."
+          ref={(input) => input && input.focus()}
         />
         <button
           className={styles.searchButton}
-          type="button"
-          onClick={this.search}
+          type="submit"
           disabled={Boolean(!searchWord.length)}
         >
           search
         </button>
-      </div>
+      </form>
     );
   }
 }
