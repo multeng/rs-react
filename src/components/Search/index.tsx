@@ -15,6 +15,7 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
     const searchWord = localStorage.getItem('searchWord');
     if (searchWord) {
       setPokemons(searchWord);
+      this.setState({ searchWord });
     } else setPokemons();
   }
 
@@ -41,6 +42,7 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
           type="search"
           placeholder="search..."
           ref={(input) => input && input.focus()}
+          value={searchWord}
         />
         <button
           className={styles.searchButton}
