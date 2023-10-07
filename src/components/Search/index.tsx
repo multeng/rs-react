@@ -44,11 +44,7 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
           ref={(input) => input && input.focus()}
           value={searchWord}
         />
-        <button
-          className={styles.searchButton}
-          type="submit"
-          disabled={Boolean(!searchWord.length)}
-        >
+        <button className={styles.searchButton} type="submit">
           search
         </button>
       </form>

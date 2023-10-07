@@ -16,7 +16,7 @@ class App extends React.PureComponent<object, AppState> {
   async setPokemons(pokeName?: string) {
     let pokemons: Pokemon[] = [];
     this.setState({ isLoaded: false });
-    if (pokeName) {
+    if (pokeName?.length) {
       pokemons = await getPokemonsByName(pokeName);
     } else {
       pokemons = await getAllPokemons();
