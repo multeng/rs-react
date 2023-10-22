@@ -10,25 +10,25 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
     this.search = this.search.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { setPokemons } = this.props;
     const searchWord = localStorage.getItem('searchWord');
     if (searchWord) {
-      setPokemons(searchWord);
+      await setPokemons(searchWord);
       this.setState({ searchWord });
-    } else setPokemons();
+    } else await setPokemons();
   }
 
   handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ searchWord: event.target.value });
+    this.setState({ searchWord: event.target.value.toLowerCase() });
   }
 
-  search(event: React.FormEvent<HTMLFormElement>) {
+  async search(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const { setPokemons } = this.props;
     const { searchWord } = this.state;
     localStorage.setItem('searchWord', searchWord);
-    setPokemons(searchWord);
+    await setPokemons(searchWord);
   }
 
   render(): React.ReactNode {
