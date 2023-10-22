@@ -1,55 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './search.module.css';
-import { SearchProps, SearchState } from '../../types';
+import type { SearchProps } from '../../types';
 
-class Search extends React.PureComponent<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = { searchWord: '' };
-    this.handleInput = this.handleInput.bind(this);
-    this.search = this.search.bind(this);
+export default function Search({ setPokemons }: SearchProps) {
+  const [searchWord, setSearchWord] = useState('');
+
+  useEffect(() => {
+    async function getData() {
+      const savedSearchWord = localStorage.getItem('searchWord');
+      if (savedSearchWord) {
+        setSearchWord(savedSearchWord);
+        await setPokemons(savedSearchWord);
+      } else await setPokemons();
+    }
+
+    getData();
+  }, []);
+
+  function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setSearchWord(event.target.value.toLowerCase());
   }
 
-  async componentDidMount() {
-    const { setPokemons } = this.props;
-    const searchWord = localStorage.getItem('searchWord');
-    if (searchWord) {
-      await setPokemons(searchWord);
-      this.setState({ searchWord });
-    } else await setPokemons();
-  }
-
-  handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ searchWord: event.target.value.toLowerCase() });
-  }
-
-  async search(event: React.FormEvent<HTMLFormElement>) {
+  async function search(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const { setPokemons } = this.props;
-    const { searchWord } = this.state;
     localStorage.setItem('searchWord', searchWord);
     await setPokemons(searchWord);
   }
 
-  render(): React.ReactNode {
-    const { searchWord } = this.state;
-
-    return (
-      <form className={styles.container} onSubmit={this.search}>
-        <input
-          className={styles.search}
-          onChange={this.handleInput}
-          type="search"
-          placeholder="search..."
-          ref={(input) => input && input.focus()}
-          value={searchWord}
-        />
-        <button className={styles.searchButton} type="submit">
-          search
-        </button>
-      </form>
-    );
-  }
+  return (
+    <form className={styles.container} onSubmit={search}>
+      <input
+        className={styles.search}
+        onChange={handleInput}
+        type="search"
+        placeholder="search..."
+        ref={(input) => input && input.focus()}
+        value={searchWord}
+      />
+      <button className={styles.searchButton} type="submit">
+        search
+      </button>
+    </form>
+  );
 }
-
-export default Search;

@@ -93,15 +93,6 @@ export interface Type {
   type: RawData;
 }
 
-export interface AppState {
-  pokemons: Pokemon[];
-  isLoaded: boolean;
-}
-
-export interface SearchState {
-  searchWord: string;
-}
-
 export interface CardListProps {
   cards: Pokemon[];
 }
