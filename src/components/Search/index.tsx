@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../Button';
 import styles from './search.module.css';
 import type { SearchProps } from '../../types';
 
-export default function Search({ setPokemons }: SearchProps) {
+export default function Search({ setPokemons, makeError }: SearchProps) {
   const [searchWord, setSearchWord] = useState('');
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Search({ setPokemons }: SearchProps) {
     }
 
     getData();
-  }, []);
+  }, [setPokemons]);
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchWord(event.target.value.toLowerCase());
@@ -37,9 +38,8 @@ export default function Search({ setPokemons }: SearchProps) {
         ref={(input) => input && input.focus()}
         value={searchWord}
       />
-      <button className={styles.searchButton} type="submit">
-        search
-      </button>
+      <Button type="submit">search</Button>
+      <Button func={makeError}>make error</Button>
     </form>
   );
 }

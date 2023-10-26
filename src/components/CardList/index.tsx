@@ -3,7 +3,11 @@ import Card from '../Card';
 import styles from './cardList.module.css';
 import { CardListProps } from '../../types';
 
-export default function CardList({ cards }: CardListProps) {
+export default function CardList({ cards, error }: CardListProps) {
+  if (error) {
+    throw new Error('crash app');
+  }
+
   return (
     <div className={styles.cardList}>
       {cards.length

@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/button-has-type': 'warn',
     'comma-dangle': ['error', 'only-multiline'],
     'react/prop-types': 'off',
     'react/display-name': 'off',
