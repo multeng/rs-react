@@ -5,7 +5,8 @@ import { CardListProps } from '../../types';
 
 class CardList extends React.PureComponent<CardListProps, object> {
   render() {
-    const { cards } = this.props;
+    const { cards, error } = this.props;
+    if (error) throw new Error();
     return (
       <div className={styles.cardList}>
         {cards.length

@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+
 export interface RawData {
   name: string;
   url: string;
@@ -96,6 +98,7 @@ export interface Type {
 export interface AppState {
   pokemons: Pokemon[];
   isLoaded: boolean;
+  isError: boolean;
 }
 
 export interface SearchState {
@@ -104,6 +107,7 @@ export interface SearchState {
 
 export interface CardListProps {
   cards: Pokemon[];
+  error: boolean;
 }
 
 export interface CardProps {
@@ -112,4 +116,26 @@ export interface CardProps {
 
 export interface SearchProps {
   setPokemons: (pokeName?: string) => Promise<void>;
+  makeError: () => void;
+}
+
+export interface ErrorBoundaryProps {
+  children?: ReactNode;
+}
+
+export interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+type ButtonType = JSX.IntrinsicElements['button']['type'];
+export interface ButtonProps
+  extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+  children: ReactNode;
+  type?: ButtonType;
+  func?: () => void;
+}
+
+export interface ErrorComponentProps {
+  error: Error | null;
 }

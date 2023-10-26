@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Button';
 import styles from './search.module.css';
 import { SearchProps, SearchState } from '../../types';
 
@@ -32,6 +33,7 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
   }
 
   render(): React.ReactNode {
+    const { makeError } = this.props;
     const { searchWord } = this.state;
 
     return (
@@ -44,9 +46,8 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
           ref={(input) => input && input.focus()}
           value={searchWord}
         />
-        <button className={styles.searchButton} type="submit">
-          search
-        </button>
+        <Button type="submit">search</Button>
+        <Button func={makeError}>make error</Button>
       </form>
     );
   }
