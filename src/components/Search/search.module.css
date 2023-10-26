@@ -1,0 +1,15 @@
+.container {
+  padding: 16px 0;
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+}
+
+.search {
+  border-radius: 12px;
+  border: 1px solid var(--global-text);
+  color: var(--secondary-text);
+  padding: 12px 24px;
+  width: 100%;
+}
+
