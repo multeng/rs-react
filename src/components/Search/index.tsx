@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Button from '../Button';
 import styles from './search.module.css';
-import type { SearchProps } from '../../types';
 
-export default function Search({ setPokemons, makeError }: SearchProps) {
+export default function Search() {
   const [searchWord, setSearchWord] = useState('');
-
-  useEffect(() => {
-    async function getData() {
-      const savedSearchWord = localStorage.getItem('searchWord');
-      if (savedSearchWord) {
-        setSearchWord(savedSearchWord);
-        await setPokemons(savedSearchWord);
-      } else await setPokemons();
-    }
-
-    getData();
-  }, [setPokemons]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setSearchWord(event.target.value.toLowerCase());
+    setSearchWord(event.target.value.toLowerCase().trim());
   }
 
-  async function search(event: React.FormEvent<HTMLFormElement>) {
+  function search(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    localStorage.setItem('searchWord', searchWord);
-    await setPokemons(searchWord);
+    searchParams.set('name', searchWord);
+    searchParams.set('page', '1');
+    setSearchParams(searchParams);
   }
 
   return (
@@ -36,10 +26,9 @@ export default function Search({ setPokemons, makeError }: SearchProps) {
         type="search"
         placeholder="search..."
         ref={(input) => input && input.focus()}
-        value={searchWord}
       />
       <Button type="submit">search</Button>
-      <Button func={makeError}>make error</Button>
+      <Button>make error</Button>
     </form>
   );
 }

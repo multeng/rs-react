@@ -1,39 +1,28 @@
-import React, { useCallback, useState } from 'react';
-import ErrorBoundary from '../ErrorBoundary';
-import type { Pokemon } from '../../types';
-import { getAllPokemons, getPokemonsByName } from '../../api';
-import CardList from '../CardList';
-import styles from './app.module.css';
+import React from 'react';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 import './global.css';
-import Search from '../Search';
+import AppLayout from '../../layouts/AppLayout';
+
+import CardContainer from '../CardContainer';
+import ErrorBoundary from '../ErrorBoundary';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<AppLayout />}>
+      <Route index element={<Navigate to="search" replace />} />
+      <Route path="search">
+        <Route index element={<CardContainer />} errorElement={<ErrorBoundary />} />
+      </Route>
+    </Route>
+  )
+);
 
 export default function App() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [isError, setIsError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const getPokemons = useCallback(async (pokeName?: string) => {
-    let newPokemons: Pokemon[] = [];
-    if (pokeName?.length) {
-      newPokemons = await getPokemonsByName(pokeName);
-    } else {
-      newPokemons = await getAllPokemons();
-    }
-
-    setPokemons(newPokemons);
-    setIsLoaded(true);
-  }, []);
-
-  const makeError = () => {
-    setIsError(true);
-  };
-
-  return (
-    <div className={styles.container}>
-      <Search setPokemons={getPokemons} makeError={makeError} />
-      <ErrorBoundary>
-        {isLoaded ? <CardList error={isError} cards={pokemons} /> : 'loading...'}
-      </ErrorBoundary>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }

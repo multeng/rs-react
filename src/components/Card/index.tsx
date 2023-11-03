@@ -22,7 +22,7 @@ export default function Card({ data }: CardProps) {
       <h4 className={styles.additionalInfoTitle}>Stats</h4>
       <div className={styles.stats}>
         {data.stats.map((stat, i) => (
-          <p key={i}>
+          <p key={`${stat.stat.name + i}`}>
             {stat.stat.name}: {stat.base_stat}
           </p>
         ))}

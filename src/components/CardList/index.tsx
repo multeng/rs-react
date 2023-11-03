@@ -1,18 +1,12 @@
 import React from 'react';
-import Card from '../Card';
-import styles from './cardList.module.css';
 import { CardListProps } from '../../types';
+import styles from './cardList.module.css';
+import Card from '../Card';
 
-export default function CardList({ cards, error }: CardListProps) {
-  if (error) {
-    throw new Error('crash app');
-  }
-
+export default function CardList({ cards }: CardListProps) {
   return (
     <div className={styles.cardList}>
-      {cards.length
-        ? cards.map((pokemon) => <Card key={pokemon.id} data={pokemon} />)
-        : 'pokemons not found'}
+      {cards && cards.map((card) => <Card key={card.id} data={card} />)}
     </div>
   );
 }

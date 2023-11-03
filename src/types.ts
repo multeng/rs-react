@@ -95,18 +95,8 @@ export interface Type {
   type: RawData;
 }
 
-export interface CardListProps {
-  cards: Pokemon[];
-  error: boolean;
-}
-
 export interface CardProps {
   data: Pokemon;
-}
-
-export interface SearchProps {
-  setPokemons: (pokeName?: string) => Promise<void>;
-  makeError: () => void;
 }
 
 export interface ErrorBoundaryProps {
@@ -128,4 +118,20 @@ export interface ButtonProps
 
 export interface ErrorComponentProps {
   error: Error | null;
+}
+
+export interface CardListProps {
+  cards: Pokemon[];
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  lastPage: number;
+  maxLength: number;
+  setCurrentPage: (page: number) => void;
+}
+
+export interface PageLinkProps
+  extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+  active?: boolean;
 }

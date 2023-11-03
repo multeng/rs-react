@@ -1,6 +1,7 @@
 .container {
+  margin: 0 auto;
   padding: 12px;
-  max-width: 1200;
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
