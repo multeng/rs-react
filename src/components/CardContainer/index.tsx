@@ -15,19 +15,25 @@ export default function CardContainer() {
   const limit = searchParams.get('limit');
 
   const getData = useCallback(async () => {
+    const lastWord = localStorage.getItem('searchWord');
     if (pokeName && pokeName.length) {
       return getPokemons(pokeName, parseFloat(limit || '5'));
     }
-    return getPokemons('', parseFloat(limit || '5'));
-  }, [pokeName, getPokemons]);
+    return getPokemons(lastWord || '', parseFloat(limit || '5'));
+  }, [pokeName, getPokemons, limit]);
 
   const checkParams = useCallback(() => {
+    const lastWord = localStorage.getItem('searchWord');
     if (!page) searchParams.set('page', '1');
-    if (!pokeName) searchParams.set('name', '');
+    if (!pokeName) {
+      if (lastWord) {
+        searchParams.set('name', lastWord);
+      } else searchParams.set('name', '');
+    }
     if (!limit) searchParams.set('limit', '5');
     if (page && parseFloat(page) > cards.length) searchParams.set('page', '1');
     setSearchParams(searchParams);
-  }, [page, pokeName, limit]);
+  }, [page, pokeName, limit, localStorage]);
 
   useEffect(() => {
     checkParams();

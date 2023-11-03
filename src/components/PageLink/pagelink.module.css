@@ -4,7 +4,7 @@
     border: 1px solid #dee2e6;
     background-color: #ffffff;
     padding: 10px 15px;
-    color: #0d6efd;
+    color: var(--button-primary);
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
@@ -29,7 +29,7 @@
 
 .pageLink:hover,
 .pageLink:focus {
-    color: #0a58ca;
+    color: var(--button-primary-hover);
     background-color: #e9ecef;
 }
 
@@ -40,8 +40,8 @@
 .pageLink.active {
     z-index: 2;
     color: #ffffff;
-    border-color: #0d6efd;
-    background-color: #0d6efd;
+    border-color: var(--button-primary);
+    background-color: var(--button-primary);
 }
 
 .disabled {
