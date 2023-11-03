@@ -4,15 +4,17 @@ import { Pokemon } from '../../types';
 import { getPokemons } from '../../api';
 import CardList from '../CardList';
 import Pagination from '../Pagination';
+import styles from './сardcontainer.module.css';
+// import Detail from '../Detail';
 
 export default function CardContainer() {
   const [cards, setCards] = useState<Pokemon[][]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const pokeName = searchParams.get('name');
   const page = searchParams.get('page');
   const limit = searchParams.get('limit');
+  // const details = searchParams.get('details');
 
   const getData = useCallback(async () => {
     const lastWord = localStorage.getItem('searchWord');
@@ -48,15 +50,32 @@ export default function CardContainer() {
     setSearchParams(searchParams);
   };
 
+  // function findCard() {
+  //   const idx = cards[
+  //     parseFloat(page || '1') - 1 < cards.length ? parseFloat(page || '1') - 1 : 0
+  //   ].findIndex((el) => el.id === parseFloat(details!));
+  //   return cards[parseFloat(page || '1') - 1 < cards.length ? parseFloat(page || '1') - 1 : 0][idx];
+  // }
+
+  // function closeDetails() {
+  //   searchParams.delete('details');
+  //   setSearchParams(searchParams);
+  // }
+
   if (isLoading) {
     return <div>LOADING</div>;
   }
 
   return (
     <>
-      <CardList
-        cards={cards[parseFloat(page || '1') - 1 < cards.length ? parseFloat(page || '1') - 1 : 0]}
-      />
+      <div className={styles.sides}>
+        <CardList
+          cards={
+            cards[parseFloat(page || '1') - 1 < cards.length ? parseFloat(page || '1') - 1 : 0]
+          }
+        />
+        {/* {details && <Detail card={findCard()} close={closeDetails} />} */}
+      </div>
       {page && parseFloat(page) && cards.length > 1 && (
         <Pagination
           currentPage={parseFloat(page)}

@@ -135,3 +135,8 @@ export interface PageLinkProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   active?: boolean;
 }
+
+export interface DetailProps {
+  card: Pokemon;
+  close: () => void;
+}

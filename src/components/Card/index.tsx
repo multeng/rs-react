@@ -1,10 +1,20 @@
 import React from 'react';
+// import { useSearchParams } from 'react-router-dom';
 import { CardProps } from '../../types';
 import styles from './card.module.css';
 import notFound from '../../assets/no-image-svgrepo-com.svg';
 
 export default function Card({ data }: CardProps) {
+  // const [searchParams, setSearchParams] = useSearchParams();
+  //
+  //
+  // function setDetails() {
+  //     searchParams.set('details', data.id.toString());
+  //     setSearchParams(searchParams);
+  // }
+
   return (
+    // <div className={styles.card} onClick={setDetails}>
     <div className={styles.card}>
       <h3 className={styles.title}>{data.name}</h3>
       <img
